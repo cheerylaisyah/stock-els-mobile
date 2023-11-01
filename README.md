@@ -75,11 +75,11 @@ Contoh penggunaan:
     Widget yang digunakan untuk menampilkan pesan sementara kecil di bagian bawah layar ketika tombol pada kartu ditekan. Pesan SnackBar berisi teks yang memberi tahu pengguna bahwa mereka telah menekan tombol.
 
 ### 3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
-- [x] **Membuat sebuah program Flutter baru dengan tema inventory seperti tugas-tugas sebelumnya.
+- [x] **Membuat sebuah program Flutter baru dengan tema inventory seperti tugas-tugas sebelumnya.**
 
     Jalankan *command* `flutter create stock_els` untuk men-*generate* proyek Flutter baru untuk aplikasi "Stock Els", lalu masuk ke dalam direktori proyek tersebut dengan *command* `cd stock_els`.
     
-- [x] **Membuat tiga tombol sederhana dengan ikon dan teks untuk:
+- [x] **Membuat tiga tombol sederhana dengan ikon dan teks untuk:**
     - Melihat daftar item (Lihat Item)
     - Menambah item (Tambah Item)
     - Logout (Logout)
@@ -199,7 +199,7 @@ Contoh penggunaan:
             }
             }
         ```
-- [x] **Memunculkan Snackbar dengan tulisan:
+- [x] **Memunculkan Snackbar dengan tulisan:**
     - "Kamu telah menekan tombol Lihat Item" ketika tombol Lihat Item ditekan.
     - "Kamu telah menekan tombol Tambah Item" ketika tombol Tambah Item ditekan.
     - "Kamu telah menekan tombol Logout" ketika tombol Logout ditekan.
@@ -224,7 +224,7 @@ Contoh penggunaan:
     }
                
     ```
-- [x] **Melakukan add-commit-push ke GitHub.
+- [x] **Melakukan add-commit-push ke GitHub.**
 
     Pada *root folder*, lakukan add-commit-push ke dalam repository GitHub yang telah ditetapkan di awal.
 
