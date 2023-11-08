@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:stock_els/widgets/left_drawer.dart';
+import 'package:stock_els/screens/shoplist_form.dart';
+import 'package:stock_els/widgets/shop_card.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5, // Control the shadow depth
                 shadowColor: Colors.black, // Color of the shadow
             ),
+            drawer: const LeftDrawer(),
             body: SingleChildScrollView(
                 // Widget wrapper yang dapat discroll
                 child: Padding(
@@ -68,57 +72,4 @@ class ShopItem {
   final IconData icon;
 
   ShopItem(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-   final ShopItem item;
-
-   const ShopCard(this.item, {super.key});
-
-   @override
-   Widget build(BuildContext context) {
-    var buttonColor;
-    if (item.name.compareTo("Lihat Item") == 0) {
-      buttonColor= Colors.pink[900];
-    }
-    else if (item.name.compareTo("Tambah Item") == 0) {
-      buttonColor= Colors.pink[700];
-    }
-    else if (item.name.compareTo("Logout") == 0) {
-      buttonColor= Colors.grey[700];
-    }
-
-    return Material(
-      color: buttonColor, 
-      child: InkWell(
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white, // Set warna text icon menjadi putih
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
