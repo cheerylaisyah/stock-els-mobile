@@ -1,7 +1,7 @@
 # 👟*Stock Els*
 
 
-### 📝Tugas 1
+### 📝Tugas 7
 
 <details>
 <summary><b>Details</b></summary>
@@ -253,4 +253,479 @@ Contoh penggunaan:
     }
     ```
     
+</details>
+
+### 📝Tugas 8
+
+<details>
+<summary><b>Details</b></summary>
+
+### 1. Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+- **`Navigator.push()`**: Menambahkan *route* baru ke dalam tumpukan *route*, memungkinkan pengguna kembali ke *route* sebelumnya. Method ini menyebabkan *route* yang ditambahkan berada pada paling atas stack, sehingga *route* yang baru saja ditambahkan tersebut akan muncul dan ditampilkan kepada pengguna.
+
+    **Contoh:**
+    ```dart
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ShopFormPage()),
+    );
+    ```
+
+- **`Navigator.pushReplacement()`**: Menghapus *route* yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu *route*. Method ini menyebabkan aplikasi untuk berpindah dari *route* yang sedang ditampilkan kepada pengguna ke suatu *route* yang diberikan. *Route* lama pada atas stack akan digantikan secara langsung oleh *route* baru yang diberikan tanpa mengubah kondisi elemen stack yang berada di bawahnya.
+
+    **Contoh:**
+    ```dart
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MyHomePage()),
+    );
+    ```
+
+### 2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+
+- **`Container`**: Widget serbaguna untuk mengatur widget lain.
+
+- **`Column` dan `Row`**: Digunakan untuk menyusun widget secara vertikal atau horizontal, berturut-turut.
+
+- **`Stack`**: Memungkinkan penumpukan widget.
+
+- **`ListView`**: Menampilkan daftar item yang dapat di-scroll.
+
+- **`GridView`**: Menampilkan item dalam susunan grid.
+
+- **`Expanded dan Flexible`** : Memberikan ruang yang sesuai berdasarkan proporsi atau prioritas.
+
+- **`SizedBox`** : Memberikan dimensi tetap pada widget atau sebagai pemisah antara elemen.
+
+### 3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+Dalam tugas ini, saya menggunakan beberapa elemen input pada formulir:
+
+1. **`TextFormField`**: Digunakan untuk semua input seperti `nama item`, `harga item`, `ukuran item`, `jumlah item`, dan `deskripsi item`.
+    - **Alasan Penggunaan**: TextFormField dipilih karena memungkinkan pengguna memasukkan teks serta dapat dengan mudah diverifikasi dan ditangani perubahan nilai. Setiap kolom formulir memerlukan input teks yang berbeda seperti nama item, harga, ukuran, jumlah, dan deskripsi. Validasi dilakukan untuk memastikan bahwa input tidak kosong dan sesuai dengan yang diharapkan, seperti memastikan bahwa input harga, ukuran, jumlah adalah angka. Selain itu, TextFormField juga menyediakan dekorasi placeholder dan label yang memudahkan pengguna untuk mengetahui keterangan dari input yang mereka isi.
+
+2. **`ElevatedButton`**: Untuk menyimpan dan memvalidasi formulir.
+    - **Alasan Penggunaan**: ElevatedButton digunakan untuk menyimpan data formulir setelah memastikan bahwa validasi telah dilalui. Ini memicu tampilan dialog yang memperlihatkan informasi yang dimasukkan, memungkinkan pengguna untuk melihat data yang telah mereka masukkan sebelum menekan tombol "OK" untuk menutup dialog.
+
+Pemilihan elemen input ini didasarkan pada fungsionalitas masing-masing. TextFormField digunakan untuk berbagai input teks yang memerlukan validasi, sementara ElevatedButton digunakan untuk menginisiasi aksi pengguna seperti penyimpanan data setelah validasi formulir berhasil.
+
+### 4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Clean Architecture adalah konsep yang memisahkan aplikasi ke dalam beberapa lapisan terisolasi:
+## 1. Lapisan Fitur
+- Merupakan lapisan presentasi yang bergantung pada framework, termasuk UI dan event handler.
+- Menggunakan widget Flutter untuk menampilkan elemen pada layar.
+- Menerapkan pola manajemen state seperti BLoCs, Provider, atau GetX.
+
+## 2. Lapisan Domain
+- Lapisan paling dalam yang tidak bergantung pada lapisan lainnya.
+- Berisi Entities, Use Cases, dan Repository Interfaces.
+- Digunakan untuk aturan bisnis aplikasi dan tidak terkait dengan implementasi spesifik Flutter.
+
+## 3. Lapisan Data
+- Bertanggung jawab atas pengambilan data dari berbagai sumber.
+- Berisi implementasi repository dari lapisan domain dan data sources seperti API atau database.
+- Memiliki DTO Models untuk representasi struktur JSON.
+
+## 4. Resources dan Shared Library
+- Resources: Aset seperti gambar, font, dan konfigurasi lainnya.
+- Shared Library: Komponen dan fungsionalitas yang dapat digunakan kembali.
+- Struktur proyek memungkinkan pengelompokan lapisan data dan domain dalam direktori "core". Terdapat pembagian direktori untuk setiap fitur (user) dan lapisan (data, domain, presentation).
+
+## 5. Pemisahan Logika Bisnis
+- Logika bisnis terletak di lapisan domain, memisahkannya dari lapisan presentasi dan data.
+- Data yang dikirim ke lapisan presentasi hanya berupa entities, bukan DTO.
+
+## 6. Dependency Injection
+- Menggunakan dependency injection untuk menghubungkan lapisan domain dan data.
+- Memisahkan implementasi repository dari lapisan domain untuk fleksibilitas dan perawatan yang lebih baik.
+
+## 7. Kode yang Mudah Dimengerti
+- Memberikan nama yang jelas pada kelas dan metode.
+- Struktur proyek membantu pembacaan kode dengan memisahkan tugas-tugas dan mengorganisir kode dengan baik.
+
+## 8. Tes Unit
+- Menulis tes unit untuk use cases di lapisan domain.
+- Memastikan kebenaran logika bisnis dan memudahkan refaktor.
+
+## 9. Sederhana Namun Efektif
+- Fokus pada sederhana namun efektif untuk memudahkan pengembangan dan pemeliharaan.
+- Struktur proyek membantu pemahaman dan navigasi melalui kode.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+- [x] **Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:**
+
+    Pada direktori `lib`, buat file `shoplist_form.dart` dan isi dengan kode berikut:
+    ```
+    import 'package:flutter/material.dart';
+    import 'package:stock_els/widgets/left_drawer.dart';
+
+    class ShopFormPage extends StatefulWidget {
+        const ShopFormPage({super.key});
+
+        @override
+        State<ShopFormPage> createState() => _ShopFormPageState();
+    }
+
+    class _ShopFormPageState extends State<ShopFormPage> {
+        @override
+        Widget build(BuildContext context) {
+            return Placeholder();
+        }
+    }
+    ```
+    - [x] **Memakai minimal tiga elemen input, yaitu `name`, `amount`, `description`. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.**
+    
+        Pada class `_ShopFormPageState` di file `shoplist_form.dart`, isi dengan kode berikut:
+        ```
+        ...
+        final _formKey = GlobalKey<FormState>();
+        String _name = "";
+        int _price = 0;
+        int _size = 0;
+        int _amount = 0;
+        String _description = "";
+        @override
+        Widget build(BuildContext context) {
+            return Scaffold(
+                appBar: AppBar(
+                    title: const Center(
+                    child: Text(
+                        'Form Tambah Item',
+                    ),
+                    ),
+                    backgroundColor: Colors.grey[900],
+                    foregroundColor: Colors.white,
+                ),
+                // TODO: Tambahkan drawer yang sudah dibuat di sini
+                drawer: const LeftDrawer(),
+                body: Form(
+                    key: _formKey,
+                    child: SingleChildScrollView(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                    decoration: InputDecoration(
+                                    hintText: "Nama Item",
+                                    labelText: "Nama Item",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    ),
+                                    onChanged: (String? value) {
+                                    setState(() {
+                                        _name = value!;
+                                    });
+                                    },
+                                    validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                        return "Nama tidak boleh kosong!";
+                                    }
+                                    return null;
+                                    },
+                                ),
+                                ),
+                                Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                    decoration: InputDecoration(
+                                    hintText: "Harga",
+                                    labelText: "Harga",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    ),
+                                    // TODO: Tambahkan variabel yang sesuai
+                                    onChanged: (String? value) {
+                                    setState(() {
+                                        _price = int.parse(value!);
+                                    });
+                                    },
+                                    validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                        return "Harga tidak boleh kosong!";
+                                    }
+                                    if (int.tryParse(value) == null) {
+                                        return "Harga harus berupa angka!";
+                                    }
+                                    return null;
+                                    },
+                                ),
+                                ),
+                                Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                    decoration: InputDecoration(
+                                    hintText: "Ukuran",
+                                    labelText: "Ukuran",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    ),
+                                    // TODO: Tambahkan variabel yang sesuai
+                                    onChanged: (String? value) {
+                                    setState(() {
+                                        _size = int.parse(value!);
+                                    });
+                                    },
+                                    validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                        return "Ukuran tidak boleh kosong!";
+                                    }
+                                    if (int.tryParse(value) == null) {
+                                        return "Ukuran harus berupa angka!";
+                                    }
+                                    return null;
+                                    },
+                                ),
+                                ),
+                                Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                    decoration: InputDecoration(
+                                    hintText: "Jumlah",
+                                    labelText: "Jumlah",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    ),
+                                    // TODO: Tambahkan variabel yang sesuai
+                                    onChanged: (String? value) {
+                                    setState(() {
+                                        _amount = int.parse(value!);
+                                    });
+                                    },
+                                    validator: (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                        return "Jumlah tidak boleh kosong!";
+                                    }
+                                    if (int.tryParse(value) == null) {
+                                        return "Jumlah harus berupa angka!";
+                                    }
+                                    return null;
+                                    },
+                                ),
+                                ),
+                                Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                    decoration: InputDecoration(
+                                    hintText: "Deskripsi",
+                                    labelText: "Deskripsi",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    ),
+                                    onChanged: (String? value) {
+                                    setState(() {
+                                        // TODO: Tambahkan variabel yang sesuai
+                                        _description = value!;
+                                        });
+                                        },
+                                    ),
+                                ),
+                            ]
+                        )
+                    ),
+                ),
+            );
+        }
+        ...    
+        ```
+    - [x] **Memiliki sebuah tombol `Save`.**
+    
+        Pada class `_ShopFormPageState` di file `shoplist_form.dart`, bagian `return Scaffold(...)` isi dengan kode berikut:
+        ```
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green[900]),
+                    ),
+                    onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                            return AlertDialog(
+                                title: const Text('Item berhasil tersimpan!'),
+                                content: SingleChildScrollView(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                    Text('Nama: $_name'),
+                                    Text('Harga: $_price'),
+                                    Text('Ukuran: $_size'),
+                                    Text('Jumlah: $_amount'),
+                                    Text('Deskripsi: $_description'),
+                                    // TODO: Munculkan value-value lainnya
+                                    ],
+                                ),
+                                ),
+                                actions: [
+                                TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                    Navigator.pop(context);
+                                    },
+                                ),
+                                ],
+                            );
+                            },
+                        );
+                        _formKey.currentState!.reset();
+                        }
+                    },
+                    child: const Text(
+                        "Save",
+                        style: TextStyle(color: Colors.white),
+                    ),
+                ),
+            ),
+        ),
+        ```
+    - [x] **Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:**
+        - [x] **Setiap elemen input tidak boleh kosong.**
+
+            Pada class `_ShopFormPageState` di file `shoplist_form.dart`, bagian `return Scaffold(...)` dan di setiap bagian `child: TextFormField(...)` isi dengan kode berikut:
+            ```
+            ...
+            validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                    return "(nama variabel) tidak boleh kosong!";
+                }
+            return null;
+            },
+            ...
+            ```
+        - [x] **Setiap elemen input harus berisi data dengan tipe data atribut modelnya.**
+
+            Pada class `_ShopFormPageState` di file `shoplist_form.dart`, bagian `return Scaffold(...)` dan di setiap bagian `child: TextFormField(...)` isi dengan kode berikut:
+            ```
+            ...
+            validator: (String? value) {
+                if (int.tryParse(value) == null) {
+                    return "Ukuran harus berupa angka!";
+                }
+            return null;
+            },
+            ...
+            ```
+    
+- [x] **Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.**
+
+    Pada class `MyHomePage` di `menu.dart`, bagian `return Scaffold(...)`, isi dengan kode berikut:
+    ```
+    import 'package:stock_els/widgets/left_drawer.dart';
+    ...
+    drawer: const LeftDrawer(),
+    ...
+    ```
+    Pada class ShopCard di `shop_card.dart`, bagian `return Material(...)`, isi dengan kode berikut:
+    ```
+    ...
+    if (item.name == "Tambah Item") {
+            // TODO: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ShopFormPage()),
+            );
+    }
+    ...
+    ```
+- [x] **Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.**
+
+    Pada class `_ShopFormPageState` di `shoplist_form.dart`, bagian `child: Column(...)` dan bagian `Align(...)` isi dengan kode berikut:
+    ```
+    onPressed: () {
+        if (_formKey.currentState!.validate()) {
+        showDialog(
+            context: context,
+            builder: (context) {
+            return AlertDialog(
+                title: const Text('Item berhasil tersimpan!'),
+                content: SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                    children: [
+                    Text('Nama: $_name'),
+                    Text('Harga: $_price'),
+                    Text('Ukuran: $_size'),
+                    Text('Jumlah: $_amount'),
+                    Text('Deskripsi: $_description'),
+                    // TODO: Munculkan value-value lainnya
+                    ],
+                ),
+                ),
+                actions: [
+                TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                    Navigator.pop(context);
+                    },
+                ),
+                ],
+            );
+            },
+        );
+        }
+    }
+    ```
+- [x] **Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:**
+    - [x] **Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.**
+
+        Pada class `LeftDrawer` di `left_drawer.dart` bagian `return Drawer(...)` isi dengan kode berikut:
+        ```
+        ...
+        ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Halaman Utama'),
+            // Bagian redirection ke MyHomePage
+            onTap: (),
+        ),
+        ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Item'),
+            // Bagian redirection ke ShopFormPage
+            onTap: (),
+        ),
+        ...
+        ```
+    - [x] **Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.**
+
+        Pada class `LeftDrawer` di `left_drawer.dart` dan bagian `ListTile` untuk halaman utama, isi dengan kode berikut:
+        ```
+        ...
+        onTap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                ));
+        },
+        ...
+        ```
+    - [x] **Ketika memiih opsi (`Tambah Item`), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.**
+
+        Pada class `LeftDrawer` di `left_drawer.dart` dan bagian `ListTile` untuk halaman utama, isi dengan kode berikut:
+        ```
+        ...
+        onTap: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ShopFormPage(),
+                ));
+        },
+        ...
+        ```
+- [x] **Melakukan add-commit-push ke GitHub.**
+
+    Pada *root folder*, lakukan add-commit-push ke dalam repository GitHub yang telah ditetapkan di awal.
 </details>
