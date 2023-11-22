@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:stock_els/models/item.dart';
-import 'package:stock_els/screens/detail_item.dart';
 import 'package:stock_els/widgets/left_drawer.dart';
+import 'package:stock_els/screens/list_item.dart';
 
-class ItemPage extends StatefulWidget {
-  const ItemPage({Key? key}) : super(key: key);
+class DetailItemPage extends StatelessWidget {
+  const DetailItemPage({Key? key, required this.id}) : super(key: key);
+  final int id;
 
-  @override
-  _ItemPageState createState() => _ItemPageState();
-}
-
-class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchItem() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url = Uri.parse(
-        'http://127.0.0.1:8000/json/');
+        'http://127.0.0.1:8000/json/${id}');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -39,7 +35,7 @@ class _ItemPageState extends State<ItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Item'),
+          title: const Text('Detail Item'),
         ),
         drawer: const LeftDrawer(),
         body: FutureBuilder(
@@ -78,26 +74,30 @@ class _ItemPageState extends State<ItemPage> {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.amount}"),
+                            Text("Amount: ${snapshot.data![index].fields.amount}"),
                             const SizedBox(height: 10),
-                            Text(
-                                "${snapshot.data![index].fields.description}"),
+                            Text("Price: ${snapshot.data![index].fields.price}"),
+                            const SizedBox(height: 10),
+                            Text("Size: ${snapshot.data![index].fields.size}"),
+                            const SizedBox(height: 10),
+                            Text("Description: ${snapshot.data![index].fields.description}"),
                             ElevatedButton(
                               onPressed: () async {
                                 Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => DetailItemPage(id: snapshot.data![index].pk)),
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ItemPage()),
                                 );
                               },
-                              child: const Text('Detail Item'),
+                              child: const Text('Kembali'),
                             ),
                           ],
                         ),
-                      ));
+                      )
+                    );
                 }
               }
             }
           )
-        );
+    );
   }
 }
